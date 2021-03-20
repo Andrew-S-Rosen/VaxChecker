@@ -11,7 +11,7 @@ The website [vaxxmax.com](http://vaxxmax.com/) automatically checks CVS, Walgree
 Simply call `python check_vaxxmax.py` once you have set everything up.
 
 # Dependencies
-This codes is written in Python 3, which you can install via [Anaconda](https://anaconda.com/). It has the following dependencies, which can be readily installed via `conda install <PackageName>` or `pip install <PackageName>`:
+This code is written in Python 3, which you can install via [Anaconda](https://anaconda.com/). It has the following dependencies, which can be readily installed via `conda install <PackageName>` or `pip install <PackageName>`:
 - Selenium (tested on 3.141.0)
 - NumPy (tested on 1.19.2)
 - Pandas (tested on 1.1.5)
