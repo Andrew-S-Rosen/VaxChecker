@@ -32,7 +32,7 @@ urls = ['http://vaxxmax.com/cvs',
 # Initialize variables
 t0 = time.time()
 elapsed_time = 0
-df_close_old = []
+df_close_old = None
 df_column_names = ['store', 'city', 'state', 'zip',
                    'county', 'last_updated', 'became_available',
                    'distance']
