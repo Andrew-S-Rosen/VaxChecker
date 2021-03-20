@@ -31,7 +31,6 @@ urls = ['http://vaxxmax.com/cvs',
 
 # Initialize variables
 t0 = time.time()
-df_rows = []
 elapsed_time = 0
 df_column_names = ['store', 'city', 'state', 'zip',
                    'county', 'last_updated', 'became_available',
@@ -46,6 +45,7 @@ driver = Chrome(executable_path=webdriver,options=chrome_options)
 
 # Search for shots!
 while elapsed_time < max_total_runtime:
+    df_rows = []
     for i, url in enumerate(urls):
 
         # Open URL
