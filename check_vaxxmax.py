@@ -50,7 +50,7 @@ while elapsed_time < max_total_runtime:
 
         # Open URL
         driver.get(url)
-        driver.get(url)
+        driver.get(url) # You have to call it twice...
 
         # Select state
         if 'cvs' in url:
