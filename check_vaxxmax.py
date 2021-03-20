@@ -32,7 +32,7 @@ urls = ['http://vaxxmax.com/cvs',
 # Initialize variables
 t0 = time.time()
 elapsed_time = 0
-df_close_old = None
+message_old = ''
 df_column_names = ['store', 'city', 'state', 'zip',
                    'county', 'last_updated', 'became_available',
                    'distance']
@@ -98,8 +98,8 @@ while elapsed_time < max_total_runtime:
         df_close = df[df['distance'] <= max_distance]
         df_close = df_close[df_column_names_short]
 
-        # If there are (new) shots, notify!
-        if len(df_close) > 0 and df_close != df_close_old:
+        # If there are shots, notify!
+        if len(df_close) > 0:
             message = "Get your jab here:\nStore, City, Zipcode, Distance (mi)\n"
             for idval, df_entries in df_close.iterrows():
                 for df_entry in df_entries:
@@ -109,14 +109,14 @@ while elapsed_time < max_total_runtime:
             print(message)
 
             # Send email if requested
-            if send_mail:
+            if send_mail and message != message_old:
                 server = smtplib.SMTP(smtp_server, smtp_port)
                 server.starttls()
                 server.login(email_acct, email_pwd)
                 email_message = 'Subject: {}\n\n{}'.format(subject, message)
                 server.sendmail(email_acct, to_email, email_message)
 
-        df_close_old = df_close
+        message_old = message
 
     # Update timer
     elapsed_time = time.time()-t0
