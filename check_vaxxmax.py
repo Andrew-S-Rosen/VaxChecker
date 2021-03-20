@@ -32,7 +32,7 @@ urls = ['http://vaxxmax.com/cvs',
 # Initialize variables
 t0 = time.time()
 elapsed_time = 0
-df_rows_old = []
+df_close_old = []
 df_column_names = ['store', 'city', 'state', 'zip',
                    'county', 'last_updated', 'became_available',
                    'distance']
@@ -89,8 +89,8 @@ while elapsed_time < max_total_runtime:
             entries_text[7] = int(entries_text[7])
             df_rows.append(entries_text)
 
-    # Send out the winners (if new)
-    if df_rows and df_rows != df_rows_old:
+    # Send out the winners
+    if df_rows:
 
         # Construct DataFrame
         df = pd.DataFrame(df_rows, columns=df_column_names)
@@ -98,8 +98,8 @@ while elapsed_time < max_total_runtime:
         df_close = df[df['distance'] <= max_distance]
         df_close = df_close[df_column_names_short]
 
-        # If there are shots, notify!
-        if len(df_close) > 0:
+        # If there are (new) shots, notify!
+        if len(df_close) > 0 and df_close != df_close_old:
             message = "Get your jab here:\nStore, City, Zipcode, Distance (mi)\n"
             for idval, df_entries in df_close.iterrows():
                 for df_entry in df_entries:
@@ -116,7 +116,7 @@ while elapsed_time < max_total_runtime:
                 email_message = 'Subject: {}\n\n{}'.format(subject, message)
                 server.sendmail(email_acct, to_email, email_message)
 
-    df_rows_old = df_rows
+        df_close_old = df_close
 
     # Update timer
     elapsed_time = time.time()-t0
