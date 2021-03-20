@@ -21,7 +21,7 @@ email_pwd = 'Fauci123!' #password to email account
 to_email = 'ILoveFauci@gmail.com' #email account to send to
 subject = 'GO GET THAT JAB!' #subject line of email
 smtp_server = 'smtp.gmail.com' #SMTP server
-smtp_port = 587 #SMTP por
+smtp_port = 587 #SMTP port
 
 # -----------------------------
 
