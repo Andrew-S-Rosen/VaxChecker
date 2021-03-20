@@ -32,6 +32,7 @@ urls = ['http://vaxxmax.com/cvs',
 # Initialize variables
 t0 = time.time()
 elapsed_time = 0
+df_rows_old = []
 df_column_names = ['store', 'city', 'state', 'zip',
                    'county', 'last_updated', 'became_available',
                    'distance']
@@ -45,7 +46,9 @@ driver = Chrome(executable_path=webdriver,options=chrome_options)
 
 # Search for shots!
 while elapsed_time < max_total_runtime:
+
     df_rows = []
+
     for i, url in enumerate(urls):
 
         # Open URL
@@ -86,8 +89,8 @@ while elapsed_time < max_total_runtime:
             entries_text[7] = int(entries_text[7])
             df_rows.append(entries_text)
 
-    # Send out the winners!
-    if df_rows:
+    # Send out the winners (if new)
+    if df_rows and df_rows != df_rows_old:
 
         # Construct DataFrame
         df = pd.DataFrame(df_rows, columns=df_column_names)
@@ -112,6 +115,8 @@ while elapsed_time < max_total_runtime:
                 server.login(email_acct, email_pwd)
                 email_message = 'Subject: {}\n\n{}'.format(subject, message)
                 server.sendmail(email_acct, to_email, email_message)
+
+    df_rows_old = df_rows
 
     # Update timer
     elapsed_time = time.time()-t0
