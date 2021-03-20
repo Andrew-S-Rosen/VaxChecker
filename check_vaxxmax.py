@@ -13,7 +13,7 @@ sleeptime = 300  # sleep time (s) between URL calls
 max_distance = 120  # max distance (mi) from you
 state = 'IL'  # state for shots
 send_mail = True  # send email (otherwise just print to screen)
-max_total_runtime = np.inf  # max time to run script
+max_total_runtime = np.inf  # max time (s) to run script
 
 # Notification settings (can be ignored for send_mail == False)
 email_acct = 'ILoveFauci@gmail.com' #email account to send from
