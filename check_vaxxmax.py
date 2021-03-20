@@ -105,7 +105,6 @@ while elapsed_time < max_total_runtime:
                 for df_entry in df_entries:
                     message += str(df_entry)+', '
                 message += '\n'
-            message += '\n'
             print(message)
 
             # Send email if requested
