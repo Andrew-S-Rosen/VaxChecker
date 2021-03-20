@@ -8,7 +8,7 @@ The website [vaxxmax.com](http://vaxxmax.com/) automatically checks CVS, Walgree
 4. Optional: Edit the notification settings in `check_vaxxmax.py` if you want an email notification (otherwise it just prints to the screen). This calls `smtplib` to send an email to a user of your choosing from your e-mail account. Caution is always advised whenever storing credentials in a paintext file. Feel free to set `send_mail` to `False` if you don't want to set up email notifications, in which case you can ignore these settings.
 
 # How to Run
-Simply call `python check_vaxxmax.py` once you've set everything up.
+Simply call `python check_vaxxmax.py` once you have set everything up.
 
 # Dependencies
 This codes is written in Python 3, which you can install via [Anaconda](https://anaconda.com/). It has the following dependencies, which can be readily installed via `conda install <PackageName>` or `pip install <PackageName>`:
