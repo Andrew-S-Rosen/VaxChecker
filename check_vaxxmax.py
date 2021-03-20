@@ -116,7 +116,7 @@ while elapsed_time < max_total_runtime:
                 email_message = 'Subject: {}\n\n{}'.format(subject, message)
                 server.sendmail(email_acct, to_email, email_message)
 
-        message_old = message
+            message_old = message
 
     # Update timer
     elapsed_time = time.time()-t0
