@@ -116,7 +116,6 @@ while elapsed_time < max_total_runtime:
                 server.login(auth[0], auth[1])
                 email_message = 'Subject: {}\n\n{}'.format(subject, message)
                 server.sendmail(auth[0], to_email, email_message)
-                server.quit()
 
     # Update timer
     elapsed_time = time.time()-t0
