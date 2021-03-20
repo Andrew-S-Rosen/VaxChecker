@@ -24,11 +24,6 @@ smtp_server = 'smtp.gmail.com' #SMTP server
 smtp_port = 587 #SMTP port
 # -----------------------------
 
-# Set up email credentials
-if send_mail:
-    auth = (email_acct, email_pwd)
-    server = smtplib.SMTP(smtp_server, smtp_port)
-
 # URLs to check of vaxxmax
 urls = ['http://vaxxmax.com/cvs',
         'http://vaxxmax.com/walgreens',
@@ -112,10 +107,11 @@ while elapsed_time < max_total_runtime:
 
             # Send email if requested
             if send_mail:
+                server = smtplib.SMTP(smtp_server, smtp_port)
                 server.starttls()
-                server.login(auth[0], auth[1])
+                server.login(email_acct, email_pwd)
                 email_message = 'Subject: {}\n\n{}'.format(subject, message)
-                server.sendmail(auth[0], to_email, email_message)
+                server.sendmail(email_acct, to_email, email_message)
 
     # Update timer
     elapsed_time = time.time()-t0
