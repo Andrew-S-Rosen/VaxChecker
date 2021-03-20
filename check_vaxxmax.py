@@ -102,7 +102,7 @@ while elapsed_time < max_total_runtime:
         df_close = df_close[df_column_names_short]
 
         # If there are shots, notify!
-        if len(df_close) > 1:
+        if len(df_close) > 0:
             message = "Get your jab here:\nStore, City, Zipcode, Distance (mi)\n"
             for idval, df_entries in df_close.iterrows():
                 for df_entry in df_entries:
