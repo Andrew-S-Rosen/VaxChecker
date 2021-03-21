@@ -78,16 +78,29 @@ while elapsed_time < max_total_runtime:
         for row in rows:
             entries = row.find_elements_by_tag_name('td')
             entries_text = [entry.text.strip() for entry in entries]
+            new_entries_text = [None]*len(df_column_names)
             if len(entries_text) == 1:
                 break
-            entries_text[0] = name
-            entries_text[3] = int(entries_text[3].split('Copy')[0].strip())
-            entries_text[5] = entries_text[5].split(
-                'about')[-1].split('ago')[0].strip()
-            entries_text[6] = entries_text[6].split(
-                'about')[-1].split('ago')[0].strip()
-            entries_text[7] = int(entries_text[7])
-            df_rows.append(entries_text)
+
+            # Reorder Rite-Aid columns to match CVS/Walgreens
+            if name == 'rite-aid':
+                new_entries_text[1] = entries_text[3]
+                new_entries_text[2] = entries_text[4]
+                new_entries_text[3] = entries_text[5]
+                new_entries_text[4] = None
+                new_entries_text[5] = entries_text[6]
+                new_entries_text[6] = entries_text[7]
+                new_entries_text[7] = entries_text[8]
+            else:
+                new_entries_text = entries_text
+
+            # Clean up entry text
+            new_entries_text[0] = name
+            new_entries_text[3] = int(new_entries_text[3].split('Copy')[0].strip())
+            new_entries_text[7] = int(new_entries_text[7])
+
+            # Add to list of row info
+            df_rows.append(new_entries_text)
 
     # Send out the winners
     if df_rows:
