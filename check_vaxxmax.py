@@ -68,7 +68,7 @@ while elapsed_time < max_total_runtime:
             selector.select_by_value(state)
         except:
             continue
-        time.sleep(2)
+        time.sleep(2) #necessary buffer time
 
         # Access table
         table = driver.find_element_by_xpath('//*[@id="locations"]/tbody')
@@ -78,11 +78,11 @@ while elapsed_time < max_total_runtime:
         for row in rows:
             entries = row.find_elements_by_tag_name('td')
             entries_text = [entry.text.strip() for entry in entries]
-            new_entries_text = [None]*len(df_column_names)
             if len(entries_text) == 1:
                 break
 
             # Reorder Rite-Aid columns to match CVS/Walgreens
+            new_entries_text = [None]*len(df_column_names)
             if name == 'rite-aid':
                 new_entries_text[1] = entries_text[3]
                 new_entries_text[2] = entries_text[4]
