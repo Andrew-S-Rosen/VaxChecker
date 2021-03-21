@@ -1,21 +1,21 @@
 from selenium.webdriver import Chrome
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
-import time
 import numpy as np
 import pandas as pd
 import smtplib
+import time
 
 # ----------Fill Me Out---------
 # Web Settings
 webdriver = r"C:\chromedriver.exe" # download: https://chromedriver.chromium.org
 sleeptime = 300  # sleep time (s) between URL calls
-max_distance = 120  # max distance (mi) from you
+max_distance = 100  # max distance (mi) from you
 state = 'IL'  # state for shots
-send_mail = True  # send email (otherwise just print to screen)
+send_email = True  # send email (otherwise just print to screen)
 max_total_runtime = np.inf  # max time (s) to run script (defaults to infinite)
 
-# Notification settings (can be ignored for send_mail = False)
+# E-mail notification settings (can be ignored for send_mail = False)
 email_acct = 'ILoveFauci@gmail.com' #email account to send from
 email_pwd = 'Fauci123!' #password to email account
 to_email = 'ILoveFauci@gmail.com' #email account to send to
@@ -118,10 +118,11 @@ while elapsed_time < max_total_runtime:
                 for df_entry in df_entries:
                     message += str(df_entry)+', '
                 message += '\n'
+            message = message[0:-3]
             print(message)
 
             # Send email if requested
-            if send_mail and message != message_old:
+            if send_email and message != message_old:
                 server = smtplib.SMTP(smtp_server, smtp_port)
                 server.starttls()
                 server.login(email_acct, email_pwd)
