@@ -119,17 +119,22 @@ while elapsed_time < max_total_runtime:
                     message += str(df_entry)+', '
                 message += '\n'
             message = message[0:-3]+'\n----------\n'
-            print(message)
 
-            # Send email if requested
-            if send_email and message != message_old:
-                server = smtplib.SMTP(smtp_server, smtp_port)
-                server.starttls()
-                server.login(email_acct, email_pwd)
-                email_message = 'Subject: {}\n\n{}'.format(subject, message)
-                server.sendmail(email_acct, to_email, email_message)
+            # Notify if there's anything new
+            if message != message_old:
 
-            message_old = message
+                # Print to screen
+                print(message)
+
+                # Send email if requested
+                if send_email:
+                    server = smtplib.SMTP(smtp_server, smtp_port)
+                    server.starttls()
+                    server.login(email_acct, email_pwd)
+                    email_message = 'Subject: {}\n\n{}'.format(subject, message)
+                    server.sendmail(email_acct, to_email, email_message)
+
+                message_old = message
 
     # Update timer
     elapsed_time = time.time()-t0
