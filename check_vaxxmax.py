@@ -81,7 +81,7 @@ while elapsed_time < max_total_runtime:
             if len(entries_text) == 1:
                 break
 
-            # Reorder Rite-Aid columns to match CVS/Walgreens
+            # Reorder Rite-Aid and Walgreens columns to match CVS
             new_entries_text = [None]*len(df_column_names)
             if name == 'rite-aid':
                 new_entries_text[1] = entries_text[3]
