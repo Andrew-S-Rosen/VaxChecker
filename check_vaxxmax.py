@@ -91,6 +91,14 @@ while elapsed_time < max_total_runtime:
                 new_entries_text[5] = entries_text[6]
                 new_entries_text[6] = entries_text[7]
                 new_entries_text[7] = entries_text[8]
+            elif name == 'walgreens':
+                new_entries_text[1] = entries_text[1]
+                new_entries_text[2] = entries_text[2]
+                new_entries_text[3] = entries_text[3]
+                new_entries_text[4] = None
+                new_entries_text[5] = entries_text[4]
+                new_entries_text[6] = entries_text[5]
+                new_entries_text[7] = entries_text[6]
             else:
                 new_entries_text = entries_text
 
