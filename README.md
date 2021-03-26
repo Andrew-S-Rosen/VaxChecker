@@ -20,8 +20,9 @@ This code is written in Python 3 (tested on Python 3.8.5), which you can install
 - Pandas (tested on 1.1.5)
 
 # Notes on Use
-- Please be courteous when setting `sleeptime` so that you don't stress the [vaxxmax.com](http://vaxxmax.com/) servers. Personally, I would set it to something like `sleeptime = 120` (120 s) if you want frequent checks or `sleeptime = 300` (300 s) for something a little less frequent.
 - The [vaxxmax.com](http://vaxxmax.com/) website gets regularly updated with new features and formatting, which can occasionally break the code. If you notice an error, please [raise an issue](https://github.com/arosen93/VaxChecker/issues) on this GitHub page so that it can be addressed (or [submit a pull request](https://github.com/arosen93/VaxChecker/pulls) if you know how to fix it).
+- Please be courteous when setting `sleeptime` so that you don't stress the [vaxxmax.com](http://vaxxmax.com/) servers. Personally, I would set it to something like `sleeptime = 120` (120 s) if you want frequent checks or `sleeptime = 300` (300 s) for something a little less frequent.
+- To avoid a large number of notifications, `check_vaxxmax.py` will not send you repeat notifications if there have been no changes since the last time you were notified. However, that means if an appointment opened, you checked, but it filled up before you could book it, then you should re-run `check_vaxxmax.py` so that the previous message history is cleared.
 
 # General Vaccine Finding Tips
 - Large blocks of appointments tend to open up in the early morning. If you're awake around 1 AM local time, do a quick check. Maybe you'll get lucky! Also check in the mornings when you wake up. As the day goes by, it will likely become harder to find an appointment near you.
