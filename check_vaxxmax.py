@@ -84,21 +84,21 @@ while elapsed_time < max_total_runtime:
             # Reorder Rite-Aid and Walgreens columns to match CVS
             new_entries_text = [None]*len(df_column_names)
             if name == 'rite-aid':
-                new_entries_text[1] = entries_text[3]
-                new_entries_text[2] = entries_text[4]
-                new_entries_text[3] = entries_text[5]
-                new_entries_text[4] = None
-                new_entries_text[5] = entries_text[6]
-                new_entries_text[6] = entries_text[7]
-                new_entries_text[7] = entries_text[8]
+                new_entries_text[1] = entries_text[3] # town/city
+                new_entries_text[2] = entries_text[4] # state
+                new_entries_text[3] = entries_text[5] # zip
+                new_entries_text[4] = None # county
+                new_entries_text[5] = entries_text[6] # last updated
+                new_entries_text[6] = entries_text[7] # became available
+                new_entries_text[7] = entries_text[-1] # distance
             elif name == 'walgreens':
-                new_entries_text[1] = entries_text[1]
-                new_entries_text[2] = entries_text[2]
-                new_entries_text[3] = entries_text[3]
-                new_entries_text[4] = None
-                new_entries_text[5] = entries_text[4]
-                new_entries_text[6] = entries_text[5]
-                new_entries_text[7] = entries_text[6]
+                new_entries_text[1] = entries_text[1] # town/city
+                new_entries_text[2] = entries_text[2] # state
+                new_entries_text[3] = entries_text[3] # zip
+                new_entries_text[4] = None #county
+                new_entries_text[5] = entries_text[4] # last updated
+                new_entries_text[6] = entries_text[5] # became available
+                new_entries_text[7] = entries_text[-1] # distance
             else:
                 new_entries_text = entries_text
 
