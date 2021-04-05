@@ -27,7 +27,8 @@ smtp_port = 587 #SMTP port
 # URLs to check of vaxxmax
 urls = ['http://vaxxmax.com/cvs',
         'http://vaxxmax.com/walgreens',
-        'http://vaxxmax.com/riteaid']
+        'http://vaxxmax.com/riteaid',
+       'http://vaxxmax.com/walmart']
 
 # Initialize variables
 t0 = time.time()
@@ -62,6 +63,8 @@ while elapsed_time < max_total_runtime:
             name = 'walgreens'
         elif 'riteaid' in url:
             name = 'rite-aid'
+        elif 'walmart' in url:
+            name = 'walmart'
         selector = Select(driver.find_element_by_xpath(
             '//*[@id="state-select-'+name+'"]'))
         try:
@@ -71,7 +74,10 @@ while elapsed_time < max_total_runtime:
         time.sleep(2) #necessary buffer time
 
         # Access table
-        table = driver.find_element_by_xpath('//*[@id="locations"]/tbody')
+        if name == 'walmart':
+            table = driver.find_element_by_xpath('//*[@id="walmart"]/tbody')
+        else:
+            table = driver.find_element_by_xpath('//*[@id="locations"]/tbody')
         rows = table.find_elements_by_tag_name('tr')
 
         # Iterate through rows of table and parse
@@ -98,6 +104,14 @@ while elapsed_time < max_total_runtime:
                 new_entries_text[4] = None #county
                 new_entries_text[5] = entries_text[4] # last updated
                 new_entries_text[6] = entries_text[5] # became available
+                new_entries_text[7] = entries_text[-1] # distance
+            elif name == 'walmart':
+                new_entries_text[1] = entries_text[2] # town/city
+                new_entries_text[2] = entries_text[3] # state
+                new_entries_text[3] = entries_text[4] # zip
+                new_entries_text[4] = entries_text[5] #county
+                new_entries_text[5] = entries_text[6] # last updated
+                new_entries_text[6] = entries_text[7] # became available
                 new_entries_text[7] = entries_text[-1] # distance
             else:
                 new_entries_text = entries_text
