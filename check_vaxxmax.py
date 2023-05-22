@@ -50,8 +50,7 @@ while elapsed_time < max_total_runtime:
 
     df_rows = []
 
-    for i, url in enumerate(urls):
-
+    for url in urls:
         # Open URL
         driver.get(url)
         driver.get(url) # You have to call it twice...
@@ -74,10 +73,11 @@ while elapsed_time < max_total_runtime:
         time.sleep(2) #necessary buffer time
 
         # Access table
-        if name == 'walmart':
-            table = driver.find_element_by_xpath('//*[@id="walmart"]/tbody')
-        else:
-            table = driver.find_element_by_xpath('//*[@id="locations"]/tbody')
+        table = (
+            driver.find_element_by_xpath('//*[@id="walmart"]/tbody')
+            if name == 'walmart'
+            else driver.find_element_by_xpath('//*[@id="locations"]/tbody')
+        )
         rows = table.find_elements_by_tag_name('tr')
 
         # Iterate through rows of table and parse
@@ -138,9 +138,9 @@ while elapsed_time < max_total_runtime:
             message = "Get your jab here:\nStore, City, Zipcode, Distance (mi)\n"
             for idval, df_entries in df_close.iterrows():
                 for df_entry in df_entries:
-                    message += str(df_entry)+', '
+                    message += f'{str(df_entry)}, '
                 message += '\n'
-            message = message[0:-3]+'\n----------\n'
+            message = message[:-3] + '\n----------\n'
 
             # Notify if there's anything new
             if message != message_old:
@@ -153,7 +153,7 @@ while elapsed_time < max_total_runtime:
                     server = smtplib.SMTP(smtp_server, smtp_port)
                     server.starttls()
                     server.login(email_acct, email_pwd)
-                    email_message = 'Subject: {}\n\n{}'.format(subject, message)
+                    email_message = f'Subject: {subject}\n\n{message}'
                     server.sendmail(email_acct, to_email, email_message)
 
                 message_old = message
